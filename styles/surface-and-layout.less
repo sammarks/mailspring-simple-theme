@@ -1,0 +1,335 @@
+// The main window's chrome shares the sidebar surface; composers stay white.
+body:has(.account-sidebar) {
+  .sheet-toolbar, .sheet-toolbar-container {
+    background: @source-list-bg !important;
+    border-bottom: 0 !important;
+    box-shadow: none !important;
+  }
+  .sheet { background: @source-list-bg; }
+  .column-ThreadList { background: @list-bg; border-top-left-radius: 16px; overflow: hidden; }
+  // MessageList renders only an empty span until a thread is selected.
+  .column-MessageList, .column-MessageListSidebar { background: @background-primary; }
+}
+
+body .sheet-toolbar, body .sheet-toolbar-container {
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+}
+
+body .thread-list {
+  .thread-icon-star, .thread-icon-star-on-hover, .thread-icon-none, .star-button {
+    display: none !important;
+    background-image: none !important;
+  }
+  // A neutral pill occupies the unused icon gutter, away from account dots.
+  .list-item { position: relative; }
+  .list-item.unread::before {
+    content: '';
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 16px;
+    border-radius: 2px;
+    background: @text-color-heading;
+    pointer-events: none;
+    z-index: 1;
+  }
+  // Draw the selection within the row without changing virtualized dimensions.
+  .list-item.selected, .list-item.focused, .list-item:hover {
+    isolation: isolate;
+    background: transparent !important;
+    border-bottom-color: transparent !important;
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 2px 8px;
+      border-radius: 8px;
+      background: @source-list-active-bg;
+      pointer-events: none;
+      z-index: -1;
+    }
+  }
+  .list-item:hover:not(.selected):not(.focused)::after { background: @list-hover-bg; }
+  .thread-icon.thread-icon-attachment {
+    background-size: 13px 13px;
+    opacity: 0.45;
+  }
+}
+
+body .mail-label.removable {
+  position: relative;
+  padding: 0 8px;
+  .inner { left: 0 !important; }
+  .x { position: absolute; left: auto; right: 3px; top: 2px; margin: 0; }
+  &:hover { padding-right: 24px; }
+}
+
+.RichEditor-toolbar button.with-select {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  > i { flex-shrink: 0; }
+}
+
+.account-sidebar .outline-view {
+  .heading .chatgpt-label-toggle {
+    border: 0; background: transparent; box-shadow: none;
+    font-family: inherit; line-height: 18px; cursor: pointer;
+  }
+  &[data-chatgpt-collapsed="true"] > [role="tree"] { display: none; }
+}
+
+// Lucide chevrons are wider than Mailspring's original disclosure triangles.
+#message-list .message-header .header-toggle-control {
+  left: -26px !important;
+  top: 16px !important;
+  width: 20px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  cursor: pointer;
+  &:not(.inactive) { display: flex; }
+  &:hover { background: @chatgpt-hover; }
+  > img { display: block; margin: 3px 1px; }
+}
+
+// This is the app's extra control, separate from links inside email content.
+body .unsubscribe-action { display: none !important; }
+
+#message-list .message-item-wrap.collapsed {
+  .message-item-white-wrap {
+    padding: 14px 0;
+    border: 0;
+    border-radius: 12px;
+    box-shadow: none;
+    background: @chatgpt-reply-bg;
+    cursor: pointer;
+  }
+  &:hover .message-item-white-wrap { background: @chatgpt-hover; }
+  &:focus-within .message-item-white-wrap {
+    outline: 2px solid @text-color-subtle;
+    outline-offset: 2px;
+  }
+  .message-item-area {
+    padding: 0 16px;
+    align-items: center;
+    gap: 12px;
+    .collapsed-from {
+      margin-right: 0;
+      max-width: 35%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: @text-color;
+      font-weight: 500;
+    }
+    .collapsed-snippet { min-width: 0; color: @text-color-subtle; cursor: pointer; }
+    .collapsed-timestamp { margin-left: 0; flex-shrink: 0; white-space: nowrap; font-size: 11px; }
+  }
+}
+
+// MultiselectList puts .thread-list on a wrapper around .list-container.
+// Pad that container so the measured viewport shrinks without moving rows.
+body .thread-list .list-container, body .thread-list.list-container {
+  box-sizing: border-box;
+  padding-top: 16px;
+}
+body .thread-list {
+  .list-rows { background: @list-bg; background-image: none; }
+  // Archiving restores focus to this listbox. Its outer outline is clipped
+  // to a horizontal line below the rows; the active row already shows focus.
+  .list-rows[role="listbox"]:focus { outline: none !important; }
+  .list-item { border-bottom-color: transparent !important; }
+}
+
+#message-list .footer-reply-area-wrap {
+  width: fit-content;
+  max-width: calc(~"100% - 40px");
+  align-self: flex-start;
+  margin: 16px 0 12px 20px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  box-shadow: none;
+  cursor: pointer;
+  &:hover { background: @chatgpt-hover; }
+  &:focus-visible { outline: 2px solid @text-color-subtle; outline-offset: 2px; }
+  .footer-reply-area {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: auto;
+    padding: 10px 12px;
+  }
+  .reply-text { margin: 0; font-size: 13px; line-height: 20px; }
+  img { flex-shrink: 0; }
+}
+
+body .thread-search-bar {
+  box-sizing: border-box;
+  height: 32px;
+  line-height: 32px;
+  border: 0;
+  border-radius: 10px;
+  background: @chatgpt-hover;
+  box-shadow: none;
+  padding: 0 12px;
+  gap: 4px;
+  &:focus, &:focus-within {
+    border-radius: 10px;
+    background: @background-primary;
+    box-shadow: 0 0 0 1px @border-color-primary;
+  }
+  .search-accessory:not(.loading) { opacity: 0.65; }
+  .tokenizing-contenteditable { min-width: 0; }
+  .suggestions { top: 36px; border-radius: 12px; overflow: hidden; }
+}
+body.platform-darwin .thread-search-bar {
+  margin-top: ((@toolbar-height-darwin - 32px) / 2);
+}
+
+body .undo-redo-toast {
+  bottom: 18px;
+  font-family: @font-family-sans-serif;
+  .content {
+    height: auto;
+    min-height: 48px;
+    gap: 12px;
+    padding: 7px 8px 7px 16px;
+    opacity: 1;
+    border: 1px solid @border-color-primary;
+    border-radius: 12px;
+    background: @background-primary;
+    color: @text-color;
+    box-shadow: 0 6px 24px fade(#000, 12%);
+  }
+  .message { margin: 0; color: @text-color; font-size: 13px; font-weight: 500; }
+  .action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 32px;
+    margin: 0;
+    padding: 6px 10px;
+    border: 0;
+    border-radius: 8px;
+    background: @chatgpt-reply-bg;
+    color: @text-color;
+    line-height: 20px;
+    &:hover { border: 0; background: @chatgpt-hover; }
+    &:active { border: 0; background: @source-list-active-bg; }
+    img { width: 16px !important; height: 16px !important; background-color: @text-color-subtle; }
+    .undo-action-text, .send-action-text { margin: 0; color: inherit; font-size: 13px; }
+  }
+  .countdown {
+    flex-shrink: 0;
+    margin-left: 0;
+    .countdown-number { color: @text-color-subtle; }
+    svg circle { stroke: @text-color-subtle; animation-name: chatgpt-undo-countdown; }
+  }
+}
+@keyframes chatgpt-undo-countdown {
+  0% { stroke-dashoffset: 0; stroke: @text-color-subtle; }
+  65% { stroke-dashoffset: 57.2px; stroke: @text-color-subtle; }
+  100% { stroke-dashoffset: 88px; stroke: @color-warning; }
+}
+
+// Native calendar attachment card (the sender's HTML invite stays intact).
+body .event-wrapper {
+  border: 0;
+  border-radius: 14px;
+  background: @chatgpt-reply-bg;
+  white-space: normal;
+  .event-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 16px 0;
+    border-bottom: 0;
+    > img { flex-shrink: 0; margin-right: 4px; opacity: 0.6; }
+    .event-title-text { font-size: 12px; }
+    .event-title { min-width: 0; font-weight: 600; overflow-wrap: anywhere; }
+    .event-download {
+      order: 1;
+      margin-left: auto;
+      flex-shrink: 0;
+      float: none;
+      border: 0;
+      border-radius: 7px;
+      padding: 5px;
+      cursor: pointer;
+      &:hover { background: @chatgpt-hover; }
+    }
+  }
+  .event-body {
+    padding: 12px 16px 16px;
+    .event-date {
+      .event-day { font-size: 13px; margin-bottom: 4px; }
+      .event-time { font-size: 19px; font-weight: 500; line-height: 1.4; }
+    }
+    .event-location { margin-top: 4px; color: @text-color-subtle; overflow-wrap: anywhere; }
+    .event-actions {
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+      .btn-rsvp {
+        margin: 0;
+        min-width: 78px;
+        height: auto;
+        min-height: 36px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 20px;
+        padding: 8px 16px;
+        border: 0;
+        border-radius: 8px;
+        box-shadow: none;
+        background-image: none;
+        &:not(.ACCEPTED):not(.TENTATIVE):not(.DECLINED) {
+          background: @background-primary;
+          color: @text-color;
+          &:hover { background: @chatgpt-hover; }
+        }
+        &.TENTATIVE { background: @text-color-subtle; color: @background-primary; }
+      }
+    }
+  }
+}
+
+body .event-wrapper .event-body .event-actions:has(> .btn-rsvp) {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  gap: 0;
+  width: fit-content;
+  max-width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background: @background-primary;
+  .btn-rsvp {
+    min-width: 0;
+    border-radius: 0;
+    gap: 7px;
+    white-space: nowrap;
+    & + .btn-rsvp { border-left: 1px solid @border-color-primary; }
+    &::before {
+      content: '';
+      display: block;
+      flex-shrink: 0;
+      width: 15px;
+      height: 15px;
+      background: currentColor;
+      -webkit-mask-size: contain;
+      -webkit-mask-position: center;
+      -webkit-mask-repeat: no-repeat;
+      pointer-events: none;
+    }
+    &:nth-child(1)::before { -webkit-mask-image: url("data:image/svg+xml,%3C%21--%20%40license%20lucide-static%20v1.53.0%20-%20ISC%20--%3E%0A%3Csvg%0A%20%20class%3D%22lucide%20lucide-check%22%0A%20%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%0A%20%20width%3D%2224%22%0A%20%20height%3D%2224%22%0A%20%20viewBox%3D%220%200%2024%2024%22%0A%20%20fill%3D%22none%22%0A%20%20stroke%3D%22currentColor%22%0A%20%20stroke-width%3D%222%22%0A%20%20stroke-linecap%3D%22round%22%0A%20%20stroke-linejoin%3D%22round%22%0A%3E%0A%20%20%3Cpath%20d%3D%22M20%206%209%2017l-5-5%22%20/%3E%0A%3C/svg%3E%0A"); }
+    &:nth-child(2)::before { -webkit-mask-image: url("data:image/svg+xml,%3C%21--%20%40license%20lucide-static%20v1.53.0%20-%20ISC%20--%3E%0A%3Csvg%0A%20%20class%3D%22lucide%20lucide-circle-help%22%0A%20%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%0A%20%20width%3D%2224%22%0A%20%20height%3D%2224%22%0A%20%20viewBox%3D%220%200%2024%2024%22%0A%20%20fill%3D%22none%22%0A%20%20stroke%3D%22currentColor%22%0A%20%20stroke-width%3D%222%22%0A%20%20stroke-linecap%3D%22round%22%0A%20%20stroke-linejoin%3D%22round%22%0A%3E%0A%20%20%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%2210%22%20/%3E%0A%20%20%3Cpath%20d%3D%22M9.09%209a3%203%200%200%201%205.83%201c0%202-3%203-3%203%22%20/%3E%0A%20%20%3Cpath%20d%3D%22M12%2017h.01%22%20/%3E%0A%3C/svg%3E%0A"); }
+    &:nth-child(3)::before { -webkit-mask-image: url("data:image/svg+xml,%3C%21--%20%40license%20lucide-static%20v1.53.0%20-%20ISC%20--%3E%0A%3Csvg%0A%20%20class%3D%22lucide%20lucide-x%22%0A%20%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%0A%20%20width%3D%2224%22%0A%20%20height%3D%2224%22%0A%20%20viewBox%3D%220%200%2024%2024%22%0A%20%20fill%3D%22none%22%0A%20%20stroke%3D%22currentColor%22%0A%20%20stroke-width%3D%222%22%0A%20%20stroke-linecap%3D%22round%22%0A%20%20stroke-linejoin%3D%22round%22%0A%3E%0A%20%20%3Cpath%20d%3D%22M18%206%206%2018%22%20/%3E%0A%20%20%3Cpath%20d%3D%22m6%206%2012%2012%22%20/%3E%0A%3C/svg%3E%0A"); }
+  }
+}

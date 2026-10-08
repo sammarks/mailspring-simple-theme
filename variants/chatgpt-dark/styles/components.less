@@ -1,0 +1,199 @@
+// Keep virtualized row dimensions and native drag regions intact.
+body {
+  font-family: @font-family;
+  -webkit-font-smoothing: antialiased;
+}
+
+.sheet-toolbar-container,
+body.is-blurred .sheet-toolbar-container {
+  background: @toolbar-background-color;
+}
+.sheet-toolbar {
+  background: @toolbar-background-color;
+  background-image: none;
+  border-bottom: 1px solid @border-color-divider;
+  box-shadow: none;
+}
+
+.outline-view {
+  .heading {
+    color: @text-color-very-subtle;
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+  .item {
+    border-radius: 8px;
+    margin: 2px 8px;
+    padding-left: 8px;
+    color: @text-color;
+    &:hover { background: @chatgpt-hover; }
+    &.selected { background: @source-list-active-bg; color: @source-list-active-color; }
+    .item-count-box {
+      border-radius: 5px;
+      box-shadow: none;
+      color: @text-color-subtle;
+      margin-left: auto;
+      padding: 0 5px;
+    }
+  }
+}
+
+.btn {
+  border-radius: 8px;
+  background: @btn-default-bg-color;
+  box-shadow: 0 0 0 1px @btn-border-color;
+  &:hover { background: @chatgpt-hover; }
+  &.btn-emphasis, &.btn-action {
+    background: @btn-emphasis-bg-color;
+    color: #ffffff;
+    box-shadow: none;
+    img.content-mask { background-color: #ffffff; }
+    &:hover { background: darken(@btn-emphasis-bg-color, 8%); }
+  }
+  &.btn-danger { background: @btn-danger-bg-color; color: #ffffff; }
+}
+.sheet-toolbar .btn-toolbar {
+  border-radius: 8px;
+  background: transparent;
+  box-shadow: none;
+  &:hover { background: @chatgpt-hover; }
+}
+.nylas-search-bar .menu .header-container input {
+  border-radius: 12px;
+  background: @input-bg;
+  border: 1px solid @input-border-color;
+  box-shadow: none;
+  &:focus { border-color: @accent-primary; }
+}
+.nylas-search-bar .menu .content-container {
+  border-radius: 10px;
+  background: @dropdown-default-bg-color;
+}
+.btn:focus-visible,
+.outline-view .item:focus-visible {
+  outline: 2px solid @accent-primary;
+  outline-offset: 2px;
+}
+
+.thread-list, .draft-list {
+  .list-item {
+    background: @list-bg;
+    border-bottom-color: @list-border;
+    &:not(.selected):not(.focused):hover { background: @list-hover-bg; }
+    &.unread:not(.selected):not(.focused) {
+      background: @list-bg;
+      &:hover { background: @list-hover-bg; }
+    }
+    &.selected, &.focused { background: @list-selected-bg; color: @text-color; }
+    .timestamp { color: @text-color-subtle; opacity: 1; }
+  }
+  .thread-icon:not(.thread-icon-unread):not(.thread-icon-star) {
+    filter: @chatgpt-icon-filter;
+  }
+  // Mailspring normally forces white text/icons on focused rows. Our
+  // softer selection backgrounds need regular foreground colors instead.
+  &.handler-split .list-item.selected,
+  .list-item.focused {
+    color: @text-color;
+    .thread-icon, .draft-icon, .mail-important-icon { filter: @chatgpt-icon-filter; }
+    .mail-label { filter: none; }
+    .list-column-HoverActions .action { filter: @chatgpt-icon-filter; }
+  }
+  .message-count { border-radius: 5px; }
+}
+
+body.is-blurred .thread-list.handler-split .list-item.selected {
+  background: @list-selected-bg;
+  color: @text-color;
+}
+
+#message-list {
+  background: @background-primary;
+  .message-subject { font-size: 22px; font-weight: 600; letter-spacing: -0.4px; }
+  .message-subject-wrap { margin-top: 18px; margin-bottom: 16px; }
+  .message-item-wrap .message-item-white-wrap {
+    background: @background-primary;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .message-item-wrap.collapsed .message-item-white-wrap { background: @background-secondary; }
+  .footer-reply-area-wrap {
+    background: @chatgpt-reply-bg;
+    border: 1px solid @border-color-primary;
+    border-radius: 16px;
+    box-shadow: none;
+    color: @text-color-subtle;
+  }
+}
+.composer-inner-wrap {
+  background: @background-primary;
+  .composer-action-bar-wrap {
+    background: @chatgpt-reply-bg;
+    background-image: none;
+    box-shadow: none;
+    border-top: 1px solid @border-color-divider;
+  }
+  .btn-send { border-radius: 16px; }
+}
+.sidebar-section {
+  border-radius: 12px;
+  border-color: @border-color-secondary;
+  box-shadow: none;
+}
+
+// Only UI icon assets are filtered; email content and attachments are untouched.
+img.content-dark, img.content-light { filter: @chatgpt-icon-filter; }
+
+// Override macOS capsule groups as well as individual toolbar buttons.
+body.platform-darwin .sheet-toolbar-container {
+  .button-group {
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    .btn.btn-toolbar {
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      box-shadow: none;
+      &:not(:first-child) { border-left: 0; }
+      &:first-child, &:last-child { border-radius: 8px; }
+      &:hover { background: @chatgpt-hover; }
+    }
+  }
+  .btn.btn-toolbar {
+    background: transparent;
+    border-radius: 8px;
+    box-shadow: none;
+    &:hover { background: @chatgpt-hover; }
+    &:active { background: @source-list-active-bg; }
+  }
+}
+body.platform-darwin.is-blurred .sheet-toolbar-container {
+  .button-group, .btn.btn-toolbar { box-shadow: none; background: transparent; }
+}
+
+.account-sidebar .outline-view {
+  .heading { padding-top: 16px; padding-bottom: 6px; }
+  .item { height: 32px; border-radius: 9px; }
+}
+
+// Match the neutral ChatGPT navigation treatment in both list layouts.
+body .thread-list .list-container .list-item,
+body .draft-list .list-container .list-item {
+  &.selected, &.focused, &.next-is-selected {
+    border-bottom-color: @border-color-secondary;
+  }
+}
+body.is-blurred .thread-list.handler-split .list-item.selected {
+  border-bottom-color: @border-color-secondary;
+}
+
+#message-list {
+  .messages-wrap .scroll-region-content-inner { padding: 12px 20px; }
+  .message-subject-wrap { padding-left: 20px; padding-right: 20px; }
+  .footer-reply-area-wrap { border-radius: 22px; margin-top: 12px; }
+}
+
+// A visible neutral keyboard focus ring, separate from the selection surface.
+body :focus-visible { outline-color: @text-color-subtle; }

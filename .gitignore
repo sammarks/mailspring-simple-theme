@@ -1,0 +1,22 @@
+# Generated distribution packages
+/dist/
+
+# Local dependencies and caches
+node_modules/
+__pycache__/
+*.py[cod]
+
+# Logs
+*.log
+
+# Local environment configuration
+.env
+.env.*
+!.env.example
+
+# macOS metadata
+.DS_Store
+._*
+
+# Local preview screenshots
+/preview/*.png

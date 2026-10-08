@@ -1,0 +1,13 @@
+{
+  "name": "mailspring-chatgpt-dark",
+  "title": "ChatGPT Dark",
+  "displayName": "ChatGPT Dark",
+  "version": "1.4.8",
+  "description": "A ChatGPT-inspired charcoal Mailspring theme with rounded controls and blue accents.",
+  "theme": "ui",
+  "license": "MIT",
+  "engines": {
+    "mailspring": "*"
+  },
+  "main": "index.js"
+}

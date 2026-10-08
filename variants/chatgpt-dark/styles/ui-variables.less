@@ -1,0 +1,123 @@
+@import "base/ui-variables";
+
+// Palette: change the accent here to personalize the theme.
+@accent-primary: #2563eb;
+@accent-primary-dark: #1d4ed8;
+@background-primary: #ffffff;
+@background-off-primary: #ffffff;
+@background-secondary: #f9f9f9;
+@background-tertiary: #6b7280;
+@panel-background-color: #f5f5f5;
+@toolbar-background-color: #ffffff;
+@background-gradient: linear-gradient(to bottom, @background-primary, @background-primary);
+
+@text-color: #202123;
+@text-color-heading: #171717;
+@text-color-subtle: #606060;
+@text-color-very-subtle: #737373;
+@text-color-inverse: #ffffff;
+@text-color-inverse-subtle: #e8efff;
+@text-color-inverse-very-subtle: #dbe6ff;
+@text-color-selected: @text-color-inverse;
+@text-color-link: @accent-primary;
+@text-color-link-hover: @accent-primary-dark;
+@text-color-link-active: @accent-primary-dark;
+
+@border-color-primary: #e5e5e5;
+@border-color-secondary: #ebebeb;
+@border-color-tertiary: #d4d4d4;
+@border-color-divider: @border-color-primary;
+@component-active-color: @accent-primary;
+@component-active-bg: @background-primary;
+
+@font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+@font-family: @font-family-sans-serif;
+@font-family-heading: @font-family-sans-serif;
+@font-weight-semi-bold: 600;
+@border-radius-base: 8px;
+@border-radius-large: 14px;
+@border-radius-small: 5px;
+@component-border-radius: 8px;
+
+@btn-default-bg-color: @background-primary;
+@btn-default-text-color: @text-color;
+@btn-border-color: @border-color-primary;
+@btn-icon-color: @text-color-subtle;
+@btn-action-bg-color: @accent-primary;
+@btn-action-text-color: #ffffff;
+@btn-emphasis-bg-color: @accent-primary;
+@btn-emphasis-text-color: #ffffff;
+@dropdown-default-bg-color: @background-primary;
+@dropdown-default-text-color: @text-color;
+@dropdown-default-border-color: @border-color-primary;
+@input-bg: @background-secondary;
+@input-bg-disabled: @panel-background-color;
+@input-border-color: @border-color-primary;
+@input-border-color-blurred: @border-color-primary;
+
+@source-list-bg: @panel-background-color;
+@source-list-active-bg: #e8e8e8;
+@source-list-active-color: @text-color;
+@source-list-inset-bg: @panel-background-color;
+@list-bg: @background-primary;
+@list-border: @border-color-secondary;
+@list-hover-bg: #f5f5f5;
+@list-focused-bg: #eaf1ff;
+@list-focused-color: @text-color;
+@list-focused-border: #c8daff;
+@list-selected-bg: #eaf1ff;
+@list-selected-color: @text-color;
+@list-selected-border: #c8daff;
+@menu-item-color-hover: @list-hover-bg;
+@menu-item-color-selected: @accent-primary;
+@menu-text-color-selected: #ffffff;
+@standard-shadow-color: rgba(0, 0, 0, 0.08);
+@standard-shadow: 0 8px 28px @standard-shadow-color;
+
+// Shared component tokens, also overridden by the dark variant.
+@chatgpt-hover: #ededed;
+@chatgpt-reply-bg: #f4f4f4;
+@chatgpt-icon-filter: none;
+
+// Dark palette: last declarations override the light defaults above.
+@gray-base: #ffffff;
+@gray-darker: #dddddd;
+@gray-dark: #cccccc;
+@gray: #aaaaaa;
+@gray-light: #888888;
+@gray-lighter: #303030;
+@white: #212121;
+@accent-primary: #80aaff;
+@accent-primary-dark: #a3c1ff;
+@background-primary: #212121;
+@background-off-primary: #212121;
+@background-secondary: #262626;
+@background-tertiary: #646464;
+@panel-background-color: #181818;
+@toolbar-background-color: #212121;
+@text-color: #ececec;
+@text-color-heading: #f5f5f5;
+@text-color-subtle: #b4b4b4;
+@text-color-very-subtle: #a0a0a0;
+@border-color-primary: #404040;
+@border-color-secondary: #363636;
+@border-color-tertiary: #525252;
+@source-list-active-bg: #303030;
+@list-hover-bg: #2b2b2b;
+@list-focused-bg: #29374f;
+@list-focused-border: #516a93;
+@list-selected-bg: #29374f;
+@list-selected-border: #516a93;
+@standard-shadow-color: rgba(0, 0, 0, 0.3);
+@chatgpt-hover: #333333;
+@chatgpt-reply-bg: #303030;
+@chatgpt-icon-filter: invert(100%);
+// Saturated button color keeps white labels readable.
+@btn-action-bg-color: #2563eb;
+@btn-emphasis-bg-color: #2563eb;
+
+// Neutral navigation surfaces keep the accent reserved for actions and links.
+@list-focused-bg: @source-list-active-bg;
+@list-selected-bg: @source-list-active-bg;
+@list-focused-border: @border-color-secondary;
+@list-selected-border: @border-color-secondary;

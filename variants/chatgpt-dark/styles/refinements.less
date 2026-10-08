@@ -1,0 +1,132 @@
+// UI typography: use the host system face, including fields and formatting controls.
+body, button, input, select, textarea,
+.RichEditor-toolbar, .RichEditor-toolbar button,
+.RichEditor-toolbar select, .composer-field-label,
+.composer-subject, .from-single-name {
+  font-family: @font-family-sans-serif;
+}
+.RichEditor-content { font-family: @font-family-sans-serif; }
+
+// Hide the per-message importance marker, keeping the Important folder usable.
+.thread-list .mail-important-icon,
+#message-list .mail-important-icon { display: none; }
+
+.account-sidebar .outline-view {
+  .item-children { padding-left: 0; }
+  .item-children .item-children { padding-left: 12px; }
+  .item { margin-left: 4px; margin-right: 8px; padding-left: 6px; }
+}
+
+// Inline label colors/gradients are supplied by the app, hence these overrides.
+body .mail-label {
+  background: @chatgpt-reply-bg !important;
+  background-image: none !important;
+  color: @text-color-subtle !important;
+  box-shadow: none !important;
+  border: 1px solid @border-color-secondary;
+  border-radius: 7px;
+  font-family: @font-family-sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 20px;
+  padding: 0 8px;
+  filter: none;
+  .x { background-color: @text-color-subtle !important; }
+}
+
+// AccountColorBar has no class; match its inline color only in participant UI.
+.thread-list .participants-wrapper > span[style*="border-left"],
+.thread-list .participants > span[style*="border-left"],
+.thread-list .list-column > span[style*="border-left"] {
+  display: inline-block;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: 7px;
+  height: 7px !important;
+  border-left-width: 7px !important;
+  border-radius: 50%;
+  padding-left: 0 !important;
+  margin-right: 8px;
+}
+.composer-participant-field.from-field {
+  .from-single-name[style*="border-left"],
+  .primary-item > span[style*="border-left"],
+  .only-item > span[style*="border-left"],
+  .contact[style*="border-left"] {
+    border-left-width: 0 !important;
+    padding-left: 0 !important;
+    &:before {
+      content: '';
+      display: inline-block;
+      box-sizing: border-box;
+      width: 7px;
+      height: 7px;
+      border-left: 7px solid;
+      border-left-color: inherit;
+      border-radius: 50%;
+      margin-right: 9px;
+      vertical-align: 1px;
+    }
+  }
+}
+
+// One quiet divider under the address fields; no rule sandwich around formatting.
+.composer-inner-wrap {
+  .composer-participant-field:after { opacity: 0.45; }
+  .composer-subject:after { display: none; }
+  .RichEditor-toolbar {
+    padding-top: 6px;
+    .floating-container { border-bottom: 0; min-height: 44px; }
+    .inner { gap: 4px; padding: 5px 0 8px; }
+    .divider { border: 0; width: 6px; margin: 0; padding: 0; }
+    button {
+      min-height: 32px;
+      max-width: 36px;
+      padding: 6px;
+      border-radius: 7px;
+      color: @text-color-subtle;
+      &:hover { background: @chatgpt-hover; }
+      &.with-select { max-width: 120px; }
+      &.active { background: @source-list-active-bg; color: @text-color; }
+    }
+  }
+}
+body .composer-inner-wrap .composer-action-bar-wrap,
+body .composer-full-window .composer-inner-wrap .composer-action-bar-wrap {
+  background: @background-primary;
+  background-image: none;
+  border: 0;
+  box-shadow: none;
+  .composer-action-bar-content {
+    padding: 14px 22px;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn.btn-toolbar:not(.btn-emphasis) { height: 34px; border-radius: 8px; }
+}
+
+// Style the actual ButtonDropdown children, including its one-action variant.
+body .composer-inner-wrap .button-dropdown.btn-send {
+  border: 0;
+  box-shadow: none;
+  border-radius: 18px;
+  .primary-item, .secondary-picker, .only-item {
+    background: @text-color-heading;
+    background-image: none;
+    color: @background-primary;
+    border: 0;
+    box-shadow: none;
+    height: 36px;
+    line-height: 36px;
+    font-family: @font-family-sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    &:before { display: none; }
+    &:hover { background: mix(@text-color-heading, @background-primary, 85%); }
+    &:active { background: mix(@text-color-heading, @background-primary, 75%); }
+    img.content-mask { background-color: @background-primary; }
+  }
+  .primary-item { padding: 0 16px; border-radius: 18px 0 0 18px; }
+  .secondary-picker { padding: 0 10px; border-radius: 0 18px 18px 0; }
+  .only-item { padding: 0 18px; border-radius: 18px; }
+}

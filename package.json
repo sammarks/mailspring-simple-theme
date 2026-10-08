@@ -1,0 +1,13 @@
+{
+  "name": "mailspring-chatgpt-light",
+  "title": "ChatGPT Light",
+  "displayName": "ChatGPT Light",
+  "version": "1.4.8",
+  "description": "A calm ChatGPT-inspired Mailspring theme with soft neutral surfaces, rounded controls, and blue accents.",
+  "theme": "ui",
+  "license": "MIT",
+  "engines": {
+    "mailspring": "*"
+  },
+  "main": "index.js"
+}

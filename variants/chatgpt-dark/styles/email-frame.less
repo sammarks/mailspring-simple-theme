@@ -1,0 +1,19 @@
+@import "ui-variables";
+
+// Mailspring copies styles from email-frame.less into each message iframe,
+// stripping this guard so they do not affect the parent application window.
+.ignore-in-parent-frame {
+  html, body { font-size: 16px; line-height: 1.6; }
+  #inbox-html-wrapper, #inbox-plain-wrapper {
+    font-family: @font-family-sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  #inbox-html-wrapper :is(p, div, span, a, td, th, li, blockquote, h1, h2, h3, h4, h5, h6):not(pre *):not(code *):not(kbd *):not(samp *) {
+    font-family: @font-family-sans-serif !important;
+  }
+  #inbox-html-wrapper :is(pre, code, kbd, samp),
+  #inbox-html-wrapper :is(pre, code, kbd, samp) * {
+    font-family: @font-family-monospace !important;
+  }
+}

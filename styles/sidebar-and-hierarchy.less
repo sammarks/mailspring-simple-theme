@@ -1,0 +1,49 @@
+// Shared inset aligns heading text with the left edge of the selection pill.
+.account-sidebar {
+  box-sizing: border-box;
+  padding: 0;
+  // ScrollRegion's absolute 100%-wide viewport cannot take outer padding.
+  .account-sidebar-sections { box-sizing: border-box; width: 100%; padding: 0 24px; }
+  .account-switcher { right: 28px; }
+  .outline-view {
+    .heading { padding-left: 0; padding-right: 0; }
+    .item { margin-left: 0; margin-right: 0; padding-left: 10px; }
+    .item-children { padding-left: 0; }
+    .item-children .item-children { padding-left: 12px; }
+    // The invisible triangle previously reserved 20px on flat navigation rows.
+    .disclosure-triangle:not(.visible) { display: none; }
+    .heading .text[style*="border-left"] {
+      border-left-width: 0 !important;
+      padding-left: 0 !important;
+      &:before {
+        content: ''; display: inline-block; width: 7px; height: 7px;
+        box-sizing: border-box; border-left: 7px solid;
+        border-left-color: inherit; border-radius: 50%;
+        margin-right: 7px; vertical-align: 1px;
+      }
+    }
+    .heading .collapse-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: auto;
+      margin-right: 0;
+      padding: 3px 7px;
+      min-width: 36px;
+      border-radius: 6px;
+      font-size: 11px;
+      color: @text-color-subtle;
+      &:hover { background: @chatgpt-hover; }
+      &:focus-visible { outline: 2px solid @text-color-subtle; outline-offset: 1px; }
+    }
+  }
+}
+
+// Sender is the primary list heading; subject and preview form quieter levels.
+body .thread-list .list-item {
+  .participants { font-weight: 600; font-size: 14px; color: @text-color-heading; }
+  .participants .unread-true { font-weight: 600 !important; }
+  .subject { font-weight: 400 !important; font-size: 13px; color: @text-color-subtle; }
+  .snippet { color: @text-color-very-subtle; font-size: 12px; }
+  .timestamp { font-size: 11px; font-weight: 400; }
+}
